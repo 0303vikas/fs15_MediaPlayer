@@ -1,7 +1,7 @@
 using src.Core.Repository;
 namespace src.Core.Entity;
 
-public class Media
+public class Media : IMedia
 {
     private readonly string _filepath;
     private IMediaFactory _mediaFactory { get; }
