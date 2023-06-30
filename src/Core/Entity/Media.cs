@@ -1,41 +1,78 @@
+using src.Core.Enum;
+using src.Core.Factory;
 using src.Core.Repository;
 namespace src.Core.Entity;
 
 public class Media : IMedia
 {
     private readonly string _filepath;
+    private PlayingOptionEnum IsPlaying = PlayingOptionEnum.NotPlaying;
     private IMediaFactory _mediaFactory { get; }
+    private readonly Guid _id;
+    private double _playTimeSeconds;
+    private
 
-    public string FileName { get; set; }
+    public string FileName
+    { get; set; }
 
-    public string FilePath
+    public Guid Id
     {
-        get { return _filepath; }
+        get { return _id; }
     }
 
-    public Media(string filePath, string fileName, IMediaFactory mediaFactory)
+    public Media(string filePath, string fileName, double playTimeLength)
     {
         _filepath = filePath;
+        _playTimeSeconds = playTimeLength;
         FileName = fileName;
-        _mediaFactory = mediaFactory;
+        _mediaFactory = new MediaFactory();
+        _id = Guid.NewGuid();
     }
 
-    public void Play()
+    public void Play(string filePath, string fileName)
     {
-        _mediaFactory.Play(FilePath, FileName);
+        // Return Media Player Instance which can start, stop of pause
+        IsPlaying = PlayingOptionEnum.Playing;
+        Console.WriteLine($"Media {fileName} is playing.");
     }
 
-    public void Pause()
+    public void Pause(string filePath, string fileName)
     {
-        _mediaFactory.Pause(FilePath, FileName);
+        if (IsPlaying == PlayingOptionEnum.Playing)
+        {
+            IsPlaying = PlayingOptionEnum.Paused;
+            Console.WriteLine($"Media {fileName} is paused.");
+        }
+        else
+        {
+            Console.WriteLine($"Media {fileName} is not playing.");
+        }
     }
 
-    public void Stop()
+    public void Stop(string filePath, string fileName)
     {
-        _mediaFactory.Stop(FilePath, FileName);
+        if (IsPlaying == PlayingOptionEnum.NotPlaying)
+        {
+            Console.WriteLine($"Media {fileName} is not playing.");
+        }
+        else
+        {
+            IsPlaying = PlayingOptionEnum.NotPlaying;
+            Console.WriteLine($"Media {fileName} is closed.");
+        }
     }
 
-    public void Seek()
+    public void CurrentPosition()
+    {
+
+    }
+
+    public void Duration()
+    {
+
+    }
+
+    public void CurrentStatus()
     {
 
     }
@@ -44,25 +81,4 @@ public class Media : IMedia
     {
 
     }
-
-
-    // public void Seek()
-    // {
-    //     public void CurrentPosition()
-    //     {
-
-    //     }
-
-    //     public void Duration()
-    //     {
-
-    //     }
-
-    //     public void CurrentStatus()
-    //     {
-
-    //     }
-
-    // }
-
 }

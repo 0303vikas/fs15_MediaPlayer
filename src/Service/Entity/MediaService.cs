@@ -53,14 +53,16 @@ public class MediaService : IMediaService
 
     }
 
-    public Media GetOneByFileName(string name)
+    public Media GetOneByFileName(string fileName)
     {
-
+        var findMedia = _mediaList.Find(item => item is Media mediaItem && mediaItem.FileName == fileName) as Media;
+        if (findMedia != null) return findMedia;
+        else throw new Exception("Not File With this name found");
     }
 
     public IEnumerable<Media> GetAll()
     {
-        return _mediaList;
+        return (IEnumerable<Media>)_mediaList;
     }
 
     public void Removing(Media media)
