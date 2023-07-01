@@ -9,4 +9,5 @@ public interface IPlayListRepository
     public void ClearAll();
     public IEnumerable<Media> GetAll();
     public Media GetById();
+    public string ToString();
 }

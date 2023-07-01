@@ -5,5 +5,9 @@ public interface IMedia
     public void Play();
     public void Pause();
     public void Stop();
-    public void Seek();
+    public void CurrentPosition();
+    public void CurrentStatus();
+    public void Duration();
+    public string ToString();
+
 }

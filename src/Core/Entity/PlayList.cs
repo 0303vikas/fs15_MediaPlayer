@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace src.Core.Entity;
 
 public class PlayList
@@ -42,5 +44,16 @@ public class PlayList
     public bool DuplicateMediaCheck(Media media)
     {
         return _mediaList.Contains(media);
+    }
+
+    public override string ToString()
+    {
+        StringBuilder printString = new StringBuilder($"PlayList Name: {_name}\n");
+        foreach (var item in _mediaList)
+        {
+            printString.Append($"{item.ToString()}");
+        }
+
+        return printString.ToString();
     }
 }
