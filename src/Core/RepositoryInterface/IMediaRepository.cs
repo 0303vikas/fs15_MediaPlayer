@@ -1,6 +1,6 @@
-namespace src.Core.Repository;
+namespace src.Core.RepositoryInterface;
 
-public interface IMedia
+public interface IMediaRepository
 {
     public void Play();
     public void Pause();
@@ -8,6 +8,4 @@ public interface IMedia
     public void CurrentPosition();
     public void CurrentStatus();
     public void Duration();
-    public string ToString();
-
 }

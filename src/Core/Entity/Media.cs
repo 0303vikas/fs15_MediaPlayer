@@ -1,8 +1,8 @@
 using src.Core.Enum;
-using src.Core.Repository;
+using src.Core.RepositoryInterface;
 namespace src.Core.Entity;
 
-public abstract class Media : IMedia
+public abstract class Media : IMediaRepository
 {
     private readonly string _filepath;
     private PlayingOptionEnum IsPlaying = PlayingOptionEnum.NotPlaying;

@@ -1,2 +1,6 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿
+
+using src.Core.Entity;
+
+var newMedia = new Media("/media/media.mp3", "Song1");
+

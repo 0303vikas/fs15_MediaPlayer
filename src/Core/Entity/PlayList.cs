@@ -1,8 +1,9 @@
 using System.Text;
+using src.Core.RepositoryInterface;
 
 namespace src.Core.Entity;
 
-public class PlayList
+public class PlayList : IPlayListRepository
 {
     private List<Media> _mediaList;
     private string _name;
@@ -34,7 +35,7 @@ public class PlayList
         return _mediaList;
     }
 
-    public Media GetName(Guid guid)
+    public Media GetById(Guid guid)
     {
         Media? findMedia = _mediaList.Find(item => item.Id == guid);
         if (findMedia != null) return findMedia;

@@ -1,5 +1,5 @@
 using System.Text;
-using src.Core.Repository;
+using src.Core.RepositoryInterface;
 
 namespace src.Core.Entity;
 
