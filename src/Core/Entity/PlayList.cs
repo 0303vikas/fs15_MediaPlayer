@@ -1,45 +1,58 @@
 using System.Text;
-using src.Core.RepositoryInterface;
 
 namespace src.Core.Entity;
 
-public class PlayList : IPlayListRepository
+public class PlayList
 {
-    private List<Media> _mediaList;
-    private string _name;
+    public string _name;
+    private int _id;
+    private int _userId;
 
-    public PlayList(string playListName)
+    public List<Media> _mediaList;
+
+    public int Id
+    {
+        get { return _id; }
+    }
+    public int UserId
+    {
+        get { return _id; }
+    }
+
+    public PlayList(string playListName, int id)
     {
         _name = playListName;
         _mediaList = new List<Media>();
     }
 
-    public void Add(Media media)
+    public void Add(Media media, int userId)
     {
-        if (!DuplicateMediaCheck(media)) throw new ArgumentException("Media already exist in the PlayList. Cann't create duplicate.");
-        _mediaList.Add(media);
+        if (MatchUserId(userId))
+        {
+            if (!DuplicateMediaCheck(media)) throw new ArgumentException("Media already exist in the PlayList. Cann't create duplicate.");
+            _mediaList.Add(media);
+        }
+        else Console.WriteLine("PlayList doesn't belong to the user.");
+
     }
 
-    public void Remove(Media media)
+    public void Remove(Media media, int userId)
     {
-        _mediaList.Remove(media);
+        if (MatchUserId(userId))
+        {
+            _mediaList.Remove(media);
+        }
+        else Console.WriteLine("PlayList doesn't belong to the user.");
+
     }
 
-    public void ClearAll()
+    public void ClearAll(int userId)
     {
-        _mediaList.Clear();
-    }
-
-    public IEnumerable<Media> GetAll()
-    {
-        return _mediaList;
-    }
-
-    public Media GetById(Guid guid)
-    {
-        Media? findMedia = _mediaList.Find(item => item.Id == guid);
-        if (findMedia != null) return findMedia;
-        else throw new Exception("Media Not Founc");
+        if (MatchUserId(userId))
+        {
+            _mediaList.Clear();
+        }
+        else Console.WriteLine("PlayList doesn't belong to the user.");
     }
 
     public bool DuplicateMediaCheck(Media media)
@@ -47,14 +60,9 @@ public class PlayList : IPlayListRepository
         return _mediaList.Contains(media);
     }
 
-    public override string ToString()
+    private bool MatchUserId(int id)
     {
-        StringBuilder printString = new StringBuilder($"PlayList Name: {_name}\n");
-        foreach (var item in _mediaList)
-        {
-            printString.Append($"{item.ToString()}");
-        }
-
-        return printString.ToString();
+        if (_userId == id) return true;
+        return false;
     }
 }

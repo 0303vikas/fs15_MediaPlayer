@@ -1,3 +1,4 @@
+using src.Core.Entity;
 using src.Service.Interface;
 namespace src.Controller;
 
@@ -10,34 +11,25 @@ public class MediaController
         _mediaService = mediaService;
     }
 
-    public void Play()
+    public void CreateMedia(string filePath, string filename, TimeSpan duration, string fileType, int id)
     {
-        _mediaService.Play();
+        _mediaService.CreateMedia(filePath, filename, duration, fileType, id);
     }
 
-    public void Pause()
+    public void DeleteOneMedia(int id)
     {
-        _mediaService.Pause();
+        _mediaService.DeleteOneMedia(id);
     }
 
-    public void Stop()
+    public void GetAllMedia()
     {
-        _mediaService.Stop();
+        _mediaService.GetAllMedia();
     }
 
-    public void CurrentPosition()
+    public void GetOneMedia(int id)
     {
-        _mediaService.CurrentPosition();
+        _mediaService.GetOneMedia(id);
     }
 
-    public void CurrentStatus()
-    {
-        _mediaService.CurrentStatus();
-    }
-
-    public void Duration()
-    {
-        _mediaService.Duration();
-    }
 
 }

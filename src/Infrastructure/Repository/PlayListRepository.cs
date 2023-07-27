@@ -5,28 +5,20 @@ namespace src.Infrastructure.Repository;
 
 public class PlayListRepository : IPlayListRepository
 {
+    public List<Media> _mediaFile = new();
+
     public void Add(Media media)
     {
-        throw new NotImplementedException();
+        _mediaFile.Add(media);
     }
 
     public void ClearAll()
     {
-        throw new NotImplementedException();
-    }
-
-    public IEnumerable<Media> GetAll()
-    {
-        throw new NotImplementedException();
-    }
-
-    public Media GetById(Guid guid)
-    {
-        throw new NotImplementedException();
+        _mediaFile.Clear();
     }
 
     public void Remove(Media media)
     {
-        throw new NotImplementedException();
+        _mediaFile.Remove(media);
     }
 }

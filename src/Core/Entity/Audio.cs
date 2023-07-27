@@ -1,8 +1,8 @@
 namespace src.Core.Entity;
 
-public class Audio : Media
+public class AudioMedia : Media
 {
-    public Audio(string filePath, string fileName, TimeSpan duration) : base(filePath, fileName, duration)
+    public AudioMedia(string filePath, string fileName, TimeSpan duration, int id) : base(filePath, fileName, duration, id)
     {
     }
 }

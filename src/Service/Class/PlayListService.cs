@@ -17,23 +17,18 @@ public class PlayListService : IPlayListService
         _playListRepository.Add(media);
     }
 
+    public void ClearAll()
+    {
+        _playListRepository.ClearAll();
+
+    }
+
     public void Remove(Media media)
     {
         _playListRepository.Remove(media);
     }
-
-    public void ClearAll()
-    {
-        _playListRepository.ClearAll();
-    }
-
-    public void GetAll()
-    {
-        _playListRepository.GetAll();
-    }
-
-    public void GetById(Guid guid)
-    {
-        _playListRepository.GetById(guid);
-    }
 }
+
+
+
+

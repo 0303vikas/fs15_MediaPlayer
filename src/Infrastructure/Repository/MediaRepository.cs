@@ -1,36 +1,79 @@
+using src.Core.Entity;
 using src.Core.RepositoryInterface;
+using src.Service.Factory;
 
 namespace src.Infrastructure.Repository;
 
 public class MediaRepository : IMediaRepository
 {
-    public void CurrentPosition()
+    public List<Media> _mediaList = new();
+
+    public MediaRepository() { }
+
+
+    public void CreateMedia(string filePath, string filename, TimeSpan duration, string fileType, int id)
     {
-        throw new NotImplementedException();
+        Media newMedia = MediaFactory.CreateBook(filePath, filename, duration, fileType, id);
+        _mediaList.Add(newMedia);
     }
 
-    public void CurrentStatus()
+    public void CurrentPosition(int id)
     {
-        throw new NotImplementedException();
+        var findMedia = CheckMediaExist(id);
+        findMedia.CurrentPosition();
     }
 
-    public void Duration()
+    public void CurrentStatus(int id)
     {
-        throw new NotImplementedException();
+        var findMedia = CheckMediaExist(id);
+        findMedia.CurrentStatus();
     }
 
-    public void Pause()
+    public void DeleteOneMedia(int id)
     {
-        throw new NotImplementedException();
+        var findMedia = CheckMediaExist(id);
+        _mediaList.Remove(findMedia);
     }
 
-    public void Play()
+    public void Duration(int id)
     {
-        throw new NotImplementedException();
+        var findMedia = CheckMediaExist(id);
+        findMedia.Duration();
     }
 
-    public void Stop()
+    public IEnumerable<Media> GetAllMedia()
     {
-        throw new NotImplementedException();
+        return _mediaList;
+    }
+
+    public Media GetOneMedia(int id)
+    {
+        var findMedia = CheckMediaExist(id);
+        return findMedia;
+    }
+
+    public void Pause(int id)
+    {
+        var findMedia = CheckMediaExist(id);
+        findMedia.Pause();
+    }
+
+    public void Play(int id)
+    {
+        var findMedia = CheckMediaExist(id);
+        findMedia.Play();
+    }
+
+    public void Stop(int id)
+    {
+        var findMedia = CheckMediaExist(id);
+        findMedia.Stop();
+    }
+
+    private Media CheckMediaExist(int id)
+    {
+        var findMedia = _mediaList.FirstOrDefault(item => item.Id == id);
+        if (findMedia == null) throw new Exception("Media file doesn't exists.");
+        return findMedia;
     }
 }

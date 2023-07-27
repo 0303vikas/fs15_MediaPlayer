@@ -1,31 +1,30 @@
 using System.Text;
-using src.Core.RepositoryInterface;
 
 namespace src.Core.Entity;
 
-public class User : IUserRepository
+public class User
 {
-    private readonly Guid _id;
-    private List<PlayList> _playList;
+    private readonly int _id;
+    private List<PlayList> _playLists;
 
     public string Name;
 
-    public User(string name)
+    public User(string name, int id)
     {
-        _id = Guid.NewGuid();
-        _playList = new List<PlayList>();
+        _id = id;
+        _playLists = new List<PlayList>();
         Name = name;
     }
 
     public IEnumerable<PlayList> GetPlayList()
     {
-        return _playList;
+        return _playLists;
     }
 
     public override string ToString()
     {
         StringBuilder printString = new StringBuilder($"PlayList of User: {Name}\n");
-        foreach (var item in _playList)
+        foreach (var item in _playLists)
         {
             printString.Append($"{item.ToString()}");
 
@@ -33,10 +32,10 @@ public class User : IUserRepository
         return printString.ToString();
     }
 
-    public void AddPlayList(PlayList playList)
+    public void AddPlayList(int id, PlayList playList, int userId)
     {
         if (CheckDuplicatePlayList(playList)) throw new Exception("Cann't create duplicate playList.");
-        _playList.Add(playList);
+        _playLists.Add(playList);
     }
 
     public void RemoveOnePlayList(PlayList playList)

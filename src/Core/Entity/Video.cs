@@ -1,8 +1,8 @@
 namespace src.Core.Entity;
 
-public class Video : Media
+public class VideoMedia : Media
 {
-    public Video(string filePath, string fileName, TimeSpan duration) : base(filePath, fileName, duration)
+    public VideoMedia(string filePath, string fileName, TimeSpan duration, int id) : base(filePath, fileName, duration, id)
     {
     }
 }

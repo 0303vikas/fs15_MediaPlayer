@@ -1,12 +1,11 @@
 using src.Core.Enum;
-using src.Core.RepositoryInterface;
 namespace src.Core.Entity;
 
-public abstract class Media : IMediaRepository
+public abstract class Media
 {
     private readonly string _filepath;
     private PlayingOptionEnum IsPlaying = PlayingOptionEnum.NotPlaying;
-    private readonly Guid _id;
+    private readonly int _id;
     private TimeSpan _duration;
     private Timer? _playTimer;
     private TimeSpan _currentPosition;
@@ -14,17 +13,17 @@ public abstract class Media : IMediaRepository
 
     public string FileName { get; set; }
 
-    public Guid Id
+    public int Id
     {
         get { return _id; }
     }
 
-    public Media(string filePath, string fileName, TimeSpan duration)
+    public Media(string filePath, string fileName, TimeSpan duration, int id)
     {
         _filepath = filePath;
         _duration = duration;
         FileName = fileName;
-        _id = Guid.NewGuid();
+        _id = id;
     }
 
     public void Play()

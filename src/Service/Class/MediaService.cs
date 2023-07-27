@@ -1,4 +1,6 @@
+using src.Core.Entity;
 using src.Core.RepositoryInterface;
+using src.Service.Factory;
 using src.Service.Interface;
 namespace src.Service.Class;
 
@@ -9,35 +11,24 @@ public class MediaService : IMediaService
     {
         _mediaRepository = mediaRepository;
     }
-
-    public void Play()
+    public void CreateMedia(string filePath, string filename, TimeSpan duration, string fileType, int id)
     {
-        _mediaRepository.Play();
+        _mediaRepository.CreateMedia(filePath, filename, duration, fileType, id);
     }
 
-    public void Pause()
+    public void DeleteOneMedia(int id)
     {
-        _mediaRepository.Pause();
+        _mediaRepository.DeleteOneMedia(id);
     }
 
-    public void Stop()
+    public void GetAllMedia()
     {
-        _mediaRepository.Stop();
+        _mediaRepository.GetAllMedia();
     }
 
-    public void CurrentPosition()
+    public void GetOneMedia(int id)
     {
-        _mediaRepository.CurrentPosition();
-    }
-
-    public void CurrentStatus()
-    {
-        _mediaRepository.CurrentStatus();
-    }
-
-    public void Duration()
-    {
-        _mediaRepository.Duration();
+        _mediaRepository.GetOneMedia(id);
     }
 }
 
